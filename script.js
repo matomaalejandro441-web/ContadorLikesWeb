@@ -25,6 +25,12 @@ let likes = 0;
 
 
 
+// ====================================
+// 3. EVENTO PARA AUMENTAR LOS LIKES
+// ====================================
+
+
+
 boton.addEventListener("click", () => {
 
     // 1. Aumentar los likes
@@ -62,7 +68,24 @@ boton.addEventListener("click", () => {
 
 });
 
+// Obtener el botón de reinicio
+const botonReset = document.getElementById("btn-reset");
 
+// Escuchar el evento de reinicio
+botonReset.addEventListener("click", () => {
+
+    // Reiniciar el contador
+    likes = 0;
+
+    // Actualizar el número en pantalla
+    textoContador.textContent = likes;
+
+    // Limpiar el historial de registros
+    tabla.innerHTML = "";
+
+    console.log("Contador reiniciado");
+
+});
 
 
 console.log("Elementos del DOM seleccionados correctamente");
