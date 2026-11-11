@@ -23,6 +23,7 @@ let likes = 0;
 // 3. EVENTO PARA AUMENTAR LOS LIKES
 // ====================================
 
+
 boton.addEventListener("click", () => {
 
     // Incrementar el contador
@@ -31,9 +32,20 @@ boton.addEventListener("click", () => {
     // Actualizar el número en pantalla
     textoContador.textContent = likes;
 
+    // Obtener la fecha y hora actual
+    const fecha = new Date();
+
+    // Formatear la hora en formato HH:MM:SS
+    const hora = fecha.toLocaleTimeString("es-CO", {
+        hour12: false
+    });
+
+    // Mostrar información en consola
     console.log("Likes actuales:", likes);
+    console.log("Hora del clic:", hora);
 
 });
+
 
 
 console.log("Elementos del DOM seleccionados correctamente");
