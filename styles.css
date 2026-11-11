@@ -73,3 +73,45 @@ th, td {
 th {
     background-color: #f3f4f6;
 }
+
+
+/* Efectos visuales de la tarjeta */
+.contenedor {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contenedor:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Efectos del botón */
+#btn-like {
+    transition: background-color 0.3s ease,
+                transform 0.2s ease;
+}
+
+#btn-like:hover {
+    transform: scale(1.05);
+}
+
+/* Efecto al pasar sobre las filas */
+tbody tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* Adaptación a dispositivos pequeños */
+@media (max-width: 480px) {
+    .contenedor {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    #contador {
+        font-size: 55px;
+    }
+}
