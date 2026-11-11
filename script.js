@@ -24,27 +24,44 @@ let likes = 0;
 // ====================================
 
 
+
 boton.addEventListener("click", () => {
 
-    // Incrementar el contador
+    // 1. Aumentar los likes
     likes++;
 
-    // Actualizar el número en pantalla
+    // 2. Actualizar el contador
     textoContador.textContent = likes;
 
-    // Obtener la fecha y hora actual
+    // 3. Obtener la hora actual
     const fecha = new Date();
 
-    // Formatear la hora en formato HH:MM:SS
     const hora = fecha.toLocaleTimeString("es-CO", {
         hour12: false
     });
 
-    // Mostrar información en consola
-    console.log("Likes actuales:", likes);
-    console.log("Hora del clic:", hora);
+    // 4. Crear una nueva fila
+    const fila = document.createElement("tr");
+
+    // 5. Crear las celdas de la fila
+    const celdaNumero = document.createElement("td");
+    const celdaHora = document.createElement("td");
+
+    // 6. Agregar los datos a las celdas
+    celdaNumero.textContent = likes;
+    celdaHora.textContent = hora;
+
+    // 7. Agregar las celdas a la fila
+    fila.appendChild(celdaNumero);
+    fila.appendChild(celdaHora);
+
+    // 8. Insertar la fila al inicio de la tabla
+    tabla.prepend(fila);
+
+    console.log("Like registrado:", likes, hora);
 
 });
+
 
 
 
