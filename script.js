@@ -12,6 +12,10 @@ const boton = document.getElementById("btn-like");
 // Obtener el cuerpo de la tabla
 const tabla = document.getElementById("tabla-registros");
 
+// Obtener el botón de reinicio
+const botonReset = document.getElementById("btn-reset");
+
+
 // ====================================
 // 2. INICIALIZAR VARIABLE DEL CONTADOR
 // ====================================
@@ -23,55 +27,55 @@ let likes = 0;
 // 3. EVENTO PARA AUMENTAR LOS LIKES
 // ====================================
 
-
-
-// ====================================
-// 3. EVENTO PARA AUMENTAR LOS LIKES
-// ====================================
-
-
-
 boton.addEventListener("click", () => {
 
-    // 1. Aumentar los likes
+    // Aumentar los likes
     likes++;
 
-    // 2. Actualizar el contador
+    // Actualizar el contador en pantalla
     textoContador.textContent = likes;
 
-    // 3. Obtener la hora actual
+    // Cambiar el color cuando los likes superen 10
+    if (likes > 10) {
+        textoContador.classList.add("contador-limite");
+    } else {
+        textoContador.classList.remove("contador-limite");
+    }
+
+    // Obtener la hora actual
     const fecha = new Date();
 
     const hora = fecha.toLocaleTimeString("es-CO", {
         hour12: false
     });
 
-    // 4. Crear una nueva fila
+    // Crear una nueva fila
     const fila = document.createElement("tr");
 
-    // 5. Crear las celdas de la fila
+    // Crear las celdas de la fila
     const celdaNumero = document.createElement("td");
     const celdaHora = document.createElement("td");
 
-    // 6. Agregar los datos a las celdas
+    // Agregar los datos a las celdas
     celdaNumero.textContent = likes;
     celdaHora.textContent = hora;
 
-    // 7. Agregar las celdas a la fila
+    // Agregar las celdas a la fila
     fila.appendChild(celdaNumero);
     fila.appendChild(celdaHora);
 
-    // 8. Insertar la fila al inicio de la tabla
+    // Insertar la fila al inicio de la tabla
     tabla.prepend(fila);
 
     console.log("Like registrado:", likes, hora);
 
 });
 
-// Obtener el botón de reinicio
-const botonReset = document.getElementById("btn-reset");
 
-// Escuchar el evento de reinicio
+// ====================================
+// 4. EVENTO PARA REINICIAR EL CONTADOR
+// ====================================
+
 botonReset.addEventListener("click", () => {
 
     // Reiniciar el contador
@@ -80,6 +84,9 @@ botonReset.addEventListener("click", () => {
     // Actualizar el número en pantalla
     textoContador.textContent = likes;
 
+    // Restaurar el color original
+    textoContador.classList.remove("contador-limite");
+
     // Limpiar el historial de registros
     tabla.innerHTML = "";
 
@@ -87,6 +94,10 @@ botonReset.addEventListener("click", () => {
 
 });
 
+
+// ====================================
+// 5. MENSAJES DE VERIFICACIÓN
+// ====================================
 
 console.log("Elementos del DOM seleccionados correctamente");
 console.log("Contador inicial:", likes);
