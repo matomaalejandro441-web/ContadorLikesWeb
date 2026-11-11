@@ -1,48 +1,22 @@
 
-// 1. Obtener los elementos del DOM
+// ====================================
+// 1. SELECCIONAR ELEMENTOS DEL DOM
+// ====================================
 
+// Obtener el contador
 const textoContador = document.getElementById("contador");
+
+// Obtener el botón de likes
 const boton = document.getElementById("btn-like");
+
+// Obtener el cuerpo de la tabla
 const tabla = document.getElementById("tabla-registros");
 
-// 2. Crear variable del contador
+// ====================================
+// 2. INICIALIZAR VARIABLE DEL CONTADOR
+// ====================================
 
 let likes = 0;
 
-// 3. Escuchar el evento de clic
-
-boton.addEventListener("click", () => {
-
-    // Aumentar el contador
-    likes++;
-
-    // Actualizar el DOM
-    textoContador.textContent = likes;
-
-    // Obtener la hora actual
-    const fecha = new Date();
-
-    const hora = fecha.toLocaleTimeString("es-CO", {
-        hour12: false
-    });
-
-    // Crear una nueva fila
-    const fila = document.createElement("tr");
-
-    // Crear las celdas
-    const celdaNumero = document.createElement("td");
-    const celdaHora = document.createElement("td");
-
-    // Asignar los valores
-    celdaNumero.textContent = likes;
-    celdaHora.textContent = hora;
-
-    // Agregar las celdas a la fila
-    fila.appendChild(celdaNumero);
-    fila.appendChild(celdaHora);
-
-    // Agregar la fila al inicio de la tabla
-    tabla.prepend(fila);
-
-});
-
+console.log("Elementos del DOM seleccionados correctamente");
+console.log("Contador inicial:", likes);
