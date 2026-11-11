@@ -115,3 +115,23 @@ tbody tr:hover {
         font-size: 55px;
     }
 }
+
+
+/* Sombra y profundidad del botón */
+#btn-like {
+    box-shadow: 0 4px 8px rgba(22, 163, 74, 0.25);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Efecto al presionar el botón */
+#btn-like:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+}
+
+/* Accesibilidad al navegar con teclado */
+#btn-like:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 4px;
+}
