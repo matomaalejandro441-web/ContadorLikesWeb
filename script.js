@@ -18,5 +18,23 @@ const tabla = document.getElementById("tabla-registros");
 
 let likes = 0;
 
+
+// ====================================
+// 3. EVENTO PARA AUMENTAR LOS LIKES
+// ====================================
+
+boton.addEventListener("click", () => {
+
+    // Incrementar el contador
+    likes++;
+
+    // Actualizar el número en pantalla
+    textoContador.textContent = likes;
+
+    console.log("Likes actuales:", likes);
+
+});
+
+
 console.log("Elementos del DOM seleccionados correctamente");
 console.log("Contador inicial:", likes);
