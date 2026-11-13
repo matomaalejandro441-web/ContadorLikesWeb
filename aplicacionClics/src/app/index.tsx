@@ -1,13 +1,12 @@
-
-import React, { useState } from 'react';
+import { useState } from "react";
 
 import {
+  ScrollView,
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+  View,
+} from "react-native";
 
 // Estructura de cada registro
 interface Registro {
@@ -17,7 +16,6 @@ interface Registro {
 }
 
 export default function App() {
-
   // Estado del contador
   const [contador, setContador] = useState(0);
 
@@ -26,13 +24,12 @@ export default function App() {
 
   // Funcion para incrementar los likes
   const incrementarContador = () => {
-
     const nuevoNumero = contador + 1;
 
     // Obtener la hora exacta
     const fecha = new Date();
 
-    const hora = fecha.toLocaleTimeString('es-CO', {
+    const hora = fecha.toLocaleTimeString("es-CO", {
       hour12: false,
     });
 
@@ -47,123 +44,117 @@ export default function App() {
     };
 
     // Agregar registro al historial
-    setRegistros((anteriores) => [
-      nuevoRegistro,
-      ...anteriores,
-    ]);
+    setRegistros((anteriores) => [nuevoRegistro, ...anteriores]);
+  };
+
+  // Funcion para restar likes
+  const restarContador = () => {
+    setContador((anterior) => Math.max(0, anterior - 1));
+  };
+
+  // Funcion para reiniciar el contador
+  const reiniciarContador = () => {
+    setContador(0);
+    setRegistros([]);
   };
 
   return (
     <View style={estilos.container}>
-
       {/* Titulo */}
-      <Text style={estilos.titulo}>
-        Contador de Likes
-      </Text>
+      <Text style={estilos.titulo}>Contador de Likes</Text>
 
-      <Text style={estilos.subtitulo}>
-        Interactividad con React Native
-      </Text>
+      <Text style={estilos.subtitulo}>Interactividad con React Native</Text>
 
-      {/* Contador */}
-      <Text style={estilos.contador}>
+      {/* Contador con cambio de color */}
+      <Text style={[estilos.contador, contador > 10 && estilos.contadorLimite]}>
         {contador}
       </Text>
 
       {/* Boton para incrementar */}
-      <TouchableOpacity
-        style={estilos.boton}
-        onPress={incrementarContador}
-      >
-        <Text style={estilos.textoBoton}>
-          ❤️ ¡Haz clic aquí!
-        </Text>
+      <TouchableOpacity style={estilos.boton} onPress={incrementarContador}>
+        <Text style={estilos.textoBoton}>❤️ ¡Haz clic aquí!</Text>
       </TouchableOpacity>
+
+      {/* Botones adicionales */}
+      <View style={estilos.botonesAdicionales}>
+        <TouchableOpacity style={estilos.botonRestar} onPress={restarContador}>
+          <Text style={estilos.textoBoton}>- Restar Like</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={estilos.botonReiniciar}
+          onPress={reiniciarContador}
+        >
+          <Text style={estilos.textoBoton}>Reiniciar</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* Tabla de registros */}
       <View style={estilos.tablaContainer}>
-
-        <Text style={estilos.tituloTabla}>
-          Historial de clics
-        </Text>
+        <Text style={estilos.tituloTabla}>Historial de clics</Text>
 
         {/* Encabezado */}
         <View style={estilos.encabezado}>
-          <Text style={estilos.th}>
-            Nº Clic
-          </Text>
+          <Text style={estilos.th}>Nº Clic</Text>
 
-          <Text style={estilos.th}>
-            Hora
-          </Text>
+          <Text style={estilos.th}>Hora</Text>
         </View>
 
         {/* Registros */}
         <ScrollView style={estilos.cuerpoTabla}>
-
           {registros.map((item) => (
+            <View key={item.id} style={estilos.fila}>
+              <Text style={estilos.td}>{item.numero}</Text>
 
-            <View
-              key={item.id}
-              style={estilos.fila}
-            >
-              <Text style={estilos.td}>
-                {item.numero}
-              </Text>
-
-              <Text style={estilos.td}>
-                {item.hora}
-              </Text>
+              <Text style={estilos.td}>{item.hora}</Text>
             </View>
-
           ))}
 
           {registros.length === 0 && (
-            <Text style={estilos.mensaje}>
-              Todavía no hay registros
-            </Text>
+            <Text style={estilos.mensaje}>Todavía no hay registros</Text>
           )}
-
         </ScrollView>
-
       </View>
-
     </View>
   );
 }
 
 // Estilos de la aplicacion
 const estilos = StyleSheet.create({
-
   container: {
     flex: 1,
-    backgroundColor: '#f4f7f6',
-    alignItems: 'center',
+    backgroundColor: "#f4f7f6",
+    alignItems: "center",
     padding: 20,
     paddingTop: 70,
   },
 
   titulo: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
   },
 
   subtitulo: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
     marginTop: 8,
   },
 
   contador: {
     fontSize: 70,
-    fontWeight: 'bold',
-    color: '#007bff',
+    fontWeight: "bold",
+    color: "#007bff",
     marginVertical: 25,
   },
 
+  // Color cuando supera los 10 likes
+  contadorLimite: {
+    color: "#dc3545",
+  },
+
   boton: {
-    backgroundColor: '#28a745',
+    backgroundColor: "#28a745",
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -171,41 +162,60 @@ const estilos = StyleSheet.create({
   },
 
   textoBoton: {
-    color: '#ffffff',
-    fontSize: 17,
-    fontWeight: 'bold',
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+
+  // Contenedor de botones adicionales
+  botonesAdicionales: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 15,
+  },
+
+  botonRestar: {
+    backgroundColor: "#e67e22",
+    padding: 12,
+    borderRadius: 8,
+  },
+
+  botonReiniciar: {
+    backgroundColor: "#dc3545",
+    padding: 12,
+    borderRadius: 8,
   },
 
   tablaContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 40,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     padding: 10,
   },
 
   tituloTabla: {
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 15,
-    color: '#333',
+    color: "#333",
   },
 
   encabezado: {
-    flexDirection: 'row',
-    backgroundColor: '#f8f9fa',
+    flexDirection: "row",
+    backgroundColor: "#f8f9fa",
     borderBottomWidth: 1,
-    borderBottomColor: '#dedede',
+    borderBottomColor: "#dedede",
   },
 
   th: {
     flex: 1,
-    color: '#007bff',
-    fontWeight: 'bold',
+    color: "#007bff",
+    fontWeight: "bold",
     fontSize: 14,
     padding: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   cuerpoTabla: {
@@ -213,24 +223,23 @@ const estilos = StyleSheet.create({
   },
 
   fila: {
-    flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    flexDirection: "row",
+    backgroundColor: "#ffffff",
     borderBottomWidth: 1,
-    borderBottomColor: '#eeeeee',
+    borderBottomColor: "#eeeeee",
   },
 
   td: {
     flex: 1,
-    color: '#333333',
+    color: "#333333",
     fontSize: 14,
     padding: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   mensaje: {
-    textAlign: 'center',
-    color: '#888888',
+    textAlign: "center",
+    color: "#888888",
     padding: 20,
   },
-
 });
